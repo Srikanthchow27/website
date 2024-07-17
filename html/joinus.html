@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: margin-right 0.5s; /* Smooth transition for content */
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 0; /* Initial width is 0 */
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0; /* Sidebar on the right */
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s; /* Slide-in effect */
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Space between content and close button */
+        }
+
+        .sidebar-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar a, .sidebar .close-btn {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 25px;
+            color: white;
+            display: block;
+            transition: 0.3s; /* Smooth transition effect */
+        }
+
+        .sidebar a:hover, .sidebar .close-btn:hover {
+            background-color: #575757;
+        }
+
+        .open-btn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #111;
+            color: white;
+            border: none;
+            padding: 10px;
+            position: fixed;
+            top: 20px;
+            right: 20px; /* Button on the right */
+            z-index: 2;
+        }
+
+        .content {
+            padding: 20px;
+            transition: margin-right 0.5s; /* Smooth transition for content */
+        }
+
+        .content.expanded {
+            margin-right: 250px; /* Adjusted for sidebar width */
+        }
+
+        .close-btn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #333;
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        /* Overlay effect to close sidebar when clicking outside */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1;
+        }
+
+        /* Join Us Section Styles */
+        .join-us-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .join-us-container h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .join-us-container p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .join-us-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .join-us-form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .join-us-form input, .join-us-form textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .join-us-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .join-us-form button {
+            padding: 15px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .join-us-form button:hover {
+            background-color: #0056b3;
+        }
+
+        body {
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay for closing sidebar -->
+    <div class="overlay" id="overlay" onclick="closeNav()"></div>
+
+    <div class="sidebar" id="mySidebar">
+        <div class="sidebar-content">
+            <a href="./About us.html" onclick="closeNav()">About Us</a>
+            <a href="./ourapproach.html" onclick="closeNav()">Our Approach</a>
+            <a href="index.html" onclick="closeNav()">Back to Home</a>
+        </div>
+        <button class="close-btn" onclick="closeNav()">× Close</button>
+    </div>
+
+    <div class="content">
+        <button class="open-btn" onclick="openNav()">☰ Open Menu</button>
+
+        <!-- Join Us Section -->
+        <div class="join-us-container">
+            <h1>Join Us</h1>
+            <p>We are excited to invite enthusiastic and talented individuals to join our dynamic team. If you're passionate about making a difference and eager to contribute to our mission, we'd love to hear from you!</p>
+            <p>Fill out the form below to submit your application. We look forward to exploring how your skills and experiences align with our goals.</p>
+            
+            <form class="join-us-form" action="submit_form.php" method="post">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone">
+                
+                <label for="resume">Resume (Upload PDF):</label>
+                <input type="file" id="resume" name="resume" accept=".pdf">
+                
+                <label for="message">Cover Letter or Message:</label>
+                <textarea id="message" name="message" rows="5" placeholder="Tell us why you'd be a great fit for our team..."></textarea>
+                
+                <button type="submit">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("overlay").style.display = "block";
+            document.querySelector(".content").classList.add("expanded");
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("overlay").style.display = "none";
+            document.querySelector(".content").classList.remove("expanded");
+        }
+    </script>
+</body>
+</html>
